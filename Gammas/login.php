@@ -16,6 +16,16 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    
+    <style>
+	body {
+  background: url(img/bg1.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+	</style>
 
 
   </head>
@@ -53,8 +63,7 @@
                     <label class="checkbox inline">
                         <input type="checkbox" id="inlineCheckbox1" value="option1"> Remember me
                     </label>
-                                
-                    <button type="submit" class="btn btn-info">Login</button>
+                                <a href="index.php"><button type="submit" class="btn btn-info">Login</button></a>
                 </div>
             
             </form>

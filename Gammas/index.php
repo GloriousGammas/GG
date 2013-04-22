@@ -31,39 +31,109 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="index.php"><img src="img/logo.png" alt="Login"></a>
+          <ul class="nav">
+  <li class="active">
+    <a href="#">Home</a>
+  </li>
+  <li><a href="#">Link</a></li>
+  <li><a href="#">Link</a></li>
+</ul>
         </div>
       </div>
     </div>
 
     <div class="container">
+    
+        <div class="well">
+    Upload file
+    </div>
 
-        <div id="login-wraper">
-            <form class="form login-form">
-                <legend>Sign in to <span class="blue">MyApp</span></legend>
-            
-                <div class="body">
-                    <label>Username</label>
-                    <input type="text">
-                    
-                    <label>Password</label>
-                    <input type="password">
-                </div>
-            
-                <div class="footer">
-                    <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Remember me
-                    </label>
-                                
-                    <button type="submit" class="btn btn-info">Login</button>
-                </div>
-            
-            </form>
-        </div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Modifed</th>
+      <th>Size</th>
+      <th >Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Dokument.doc</td>
+      <td>2013-04-22</td>
+      <td>1mb</td>
+       <td>
+
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-download-alt"></i></a>
+    <a class="btn" href="#"><i class="icon-remove"></i></a>
+  </div>
+  </td>
+    </tr>
+    
+       <tr>
+      <td>Fil.doc</td>
+      <td>2013-04-22</td>
+      <td>1mb</td>
+   <td>
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-download-alt"></i></a>
+    <a class="btn" href="#"><i class="icon-remove"></i></a>
+  </div>
+  </td>
+    </tr>
+    
+    
+    
+       <tr>
+      <td>Häst.jpg</td>
+      <td>2013-04-22</td>
+      <td>1mb</td>
+   <td>
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-download-alt"></i></a>
+    <a class="btn" href="#"><i class="icon-remove"></i></a>
+  </div>
+  </td>
+    </tr>
+    
+    
+       <tr>
+      <td>Dokument.doc</td>
+      <td>2013-04-22</td>
+      <td>1mb</td>
+   <td>
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-download-alt"></i></a>
+    <a class="btn" href="#"><i class="icon-remove"></i></a>
+  </div>
+  </td>
+    </tr>
+    
+    
+       <tr>
+      <td>Dokument.doc</td>
+      <td>2013-04-22</td>
+      <td>1mb</td>
+   <td>
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-download-alt"></i></a>
+    <a class="btn" href="#"><i class="icon-remove"></i></a>
+  </div>
+  </td>
+    </tr>
+  </tbody>
+</table>
+
+
 
     </div>
 
     <footer class="white navbar-fixed-bottom">
-      Don't have an account yet? <a href="signup.php" class="btn btn-black">Register</a>
+    
+    
+    
+    
     </footer>
 
 
