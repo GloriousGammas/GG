@@ -1,0 +1,5 @@
+/* Custom CSS styles. Keep Bootstrap as it is */
+
+#overview td:nth-child(4) { width: 50px; } /* Ställer in bredden på Action i tabellen */
+/*footer.white { height: auto; text-align: left; background: #333; color: #ddd; text-shadow: 1px 1px 1px #222; }
+footer.white h2 { border-bottom: 1px solid #ddd } */
