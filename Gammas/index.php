@@ -24,29 +24,24 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
+      
         <div class="container">
+        
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.php"><img src="img/logo.png" alt="Login"></a>
-          <ul class="nav">
-  <li class="active">
-    <a href="#">Home</a>
-  </li>
-  <li><a href="#">Link</a></li>
-  <li><a href="#">Link</a></li>
-</ul>
+          <a class="brand" href="index.php">Glorious Gammas</a>
+
+
         </div>
       </div>
     </div>
 
     <div class="container">
     
-        <div class="well">
-    Upload file
-    </div>
+    
 
 <table class="table table-striped">
   <thead>
@@ -127,12 +122,14 @@
 
 
 
+
+
     </div>
 
     <footer class="white navbar-fixed-bottom">
     
     
-    
+
     
     </footer>
 

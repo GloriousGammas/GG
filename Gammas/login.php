@@ -19,7 +19,7 @@
     
     <style>
 	body {
-  background: url(img/bg1.png) no-repeat center center fixed;
+  background: url(img/bg3.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -40,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.php"><img src="img/logo.png" alt="Login"></a>
+      <a class="brand" href="index.php">Glorious Gammas</a>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
 
         <div id="login-wraper">
             <form class="form login-form">
-                <legend>Sign in to <span class="blue">MyApp</span></legend>
+                <legend>Sign in to <span class="blue">Glorious</span></legend>
             
                 <div class="body">
                     <label>Username</label>
@@ -86,4 +86,7 @@
 
   
 
-<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1099px; width: 1920px; z-index: -999999; position: fixed;"><img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1954.7317708333333px; height: 1099px; max-width: none; z-index: -999999; left: -17.36588541666663px; top: 0px;" src="./Login page - Typica_files/bg1.png"></div></body></html>
+<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1099px; width: 1920px; z-index: -999999; position: fixed;"><img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1954.7317708333333px; height: 1099px; max-width: none; z-index: -999999; left: -17.36588541666663px; top: 0px;" src="img/bg3.jpg"></div>
+
+
+</body></html>
