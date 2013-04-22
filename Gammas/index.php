@@ -1,5 +1,15 @@
+<?php include "header.php";
+
+	// Kolla om inloggad = sessionen satt 
+	
+if (!isset($_SESSION['sess_user'])) {
+   header("Location: login.php");
+   exit;
+}
+
+
+ ?>
 <!DOCTYPE html>
-<!-- saved from url=(0050)http://wbpreview.com/previews/WB0F56883/index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Overview - Glorious Gammas</title>
@@ -18,6 +28,18 @@
     <![endif]-->
 
 
+<?php
+
+// Utloggning 
+if (isset($_POST['logout'])){
+   $_SESSION = array();
+   session_destroy();
+   header("Location: login.php");
+   exit;
+}
+?>
+
+
   </head>
 
   <body>
@@ -34,6 +56,10 @@
           </a>
           <a class="brand" href="index.php">Glorious Gammas</a>
 
+<form class="pull-right" method="post" action="">
+
+<button type="submit" name="logout">Logga ut</button>
+</form>
 
         </div>
       </div>
@@ -144,4 +170,4 @@
 
   
 
-<div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1099px; width: 1920px; z-index: -999999; position: fixed;"><img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1954.7317708333333px; height: 1099px; max-width: none; z-index: -999999; left: -17.36588541666663px; top: 0px;" src="./Login page - Typica_files/bg1.png"></div></body></html>
+</body></html>
