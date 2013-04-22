@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="index.php"><img src="img/logo.png" alt="Login"></a>
+          <a class="brand" href="login.php"><img src="img/logo.png" alt="Login"></a>
         </div>
       </div>
     </div>
@@ -39,10 +39,11 @@
 
         <div id="login-wraper">
             <form class="form login-form">
-                <legend>Sign in to <span class="blue">Glorious</span></legend>
+                <legend>Register </legend>
             
                 <div class="body">
-                    <label>Username</label>
+                   
+                    <label>E-Mail</label>
                     <input type="text">
                     
                     <label>Password</label>
@@ -50,6 +51,9 @@
                     
                      <label>Password again</label>
                     <input type="password">
+                    
+                    <label>Name:</label>
+                    <input type="text">
                 </div>
             
                 <div class="footer">
@@ -66,7 +70,7 @@
     </div>
 
     <footer class="white navbar-fixed-bottom">
-      Don't have an account yet? <a href="signup.php" class="btn btn-black">Register</a>
+      Already have an account? <a href="login.php" class="btn btn-black">Log in</a>
     </footer>
 
 
