@@ -2,7 +2,7 @@
 <!-- saved from url=(0050)http://wbpreview.com/previews/WB0F56883/index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Login page - Typica</title>
+    <title>Overview - Glorious Gammas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Responsive HTML template for Your company">
     <meta name="author" content="Oskar Żabik (oskar.zabik@gmail.com)">
@@ -30,7 +30,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="login.html"><img src="img/logo.png" alt="Login"></a>
+          <a class="brand" href="index.php"><img src="img/logo.png" alt="Login"></a>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
     </div>
 
     <footer class="white navbar-fixed-bottom">
-      Don't have an account yet? <a href="register.html" class="btn btn-black">Register</a>
+      Don't have an account yet? <a href="signup.php" class="btn btn-black">Register</a>
     </footer>
 
 
