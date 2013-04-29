@@ -31,17 +31,33 @@
 	  
 	  	if(isset($_POST['submit']))
 		{
-			//CheckUserInput();
-		
-		
-		//function CheckUserInput()
-		//{
-			$email = trim($_POST["email"]);
-			$password = trim($_POST['password']);
-			$reEntredPassword = trim($_POST['reEnteredPassword']);
-			$name = trim($_POST['name']);
+			$connection = mysql_connect("http://gloriousgammas-154741.phpmyadmin.mysql.binero.se", "154741_ar88910","GGNybs232", "154741-gloriousgammas" );
 			
-			if(strpos($email, '@') !== false)
+			if(!$connection)
+			{
+				die('Could not connect'. mysql_error());
+			}
+			echo 'Connected successfully';
+			
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			$reEntredPassword = $_POST['reEnteredPassword'];
+			$name = $_POST['name'];
+			
+			$sql = "INSERT INTO members (pass, name, email)
+			VALUES ('$_POST[password]', '$_POST[name]', '$_POST[email]')";
+			
+			if(!mysql_query($connection, $sql))
+			{
+				die('Error: ' . mysql_error($connection));
+			}
+			$result = mysql_query($connection, $sql);
+			echo "Person added";
+			
+			mysql_close($connection);
+		}
+			
+			/*if(strpos($email, '@') !== false)
 			{
 				$checkEmail = strstr($eMail, "@");
 				if(strpos($checkMail, '.') !== false)
@@ -60,11 +76,7 @@
 					}
 					else
 					{
-						$sql = "INSERT INTO members (pass, name, email)
-				VALUES ('$password', '$name', '$email')";
-				$result = mysql_query($sql);
-				echo "Success";
-						//CreateAccount($password, $name, $email);
+
 					}
 					}
 					else
@@ -76,21 +88,13 @@
 				}
 				else
 				{
-					echo "E-mail must contain . to the right 				of @.";
+					echo "E-mail must contain . to the right of @.";
 				}
 			}
 			else
 			{
 				echo "E-mail must contain @.";
-			}	
-		//}
-		
-		}
-		//function CreateAccount($password, $name, $email)
-		//{
-				
-		//}
-	 
+			}	*/
 	 	?>
 
     </head>
@@ -136,7 +140,7 @@
                 <input type="checkbox" id="inlineCheckbox1" value="option1"> Remember me
               </label>
               
-              <button type="submit" class="btn btn-info">Register</button>
+              <button type="submit" name="submit" class="btn btn-info">Register</button>
             </div>
             
           </form>
