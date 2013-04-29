@@ -26,6 +26,72 @@
         background-size: cover;
       }
       </style>
+      
+      <?php
+	  
+	  	if(isset($_POST['submit']))
+		{
+			//CheckUserInput();
+		
+		
+		//function CheckUserInput()
+		//{
+			$email = trim($_POST["email"]);
+			$password = trim($_POST['password']);
+			$reEntredPassword = trim($_POST['reEnteredPassword']);
+			$name = trim($_POST['name']);
+			
+			if(strpos($email, '@') !== false)
+			{
+				$checkEmail = strstr($eMail, "@");
+				if(strpos($checkMail, '.') !== false)
+				{
+					if(empty($password))
+					{
+						echo "Password can´t be empty.";
+					}
+					else
+					{
+					if($password == $reEntredPassword)
+					{
+					if(empty($name))
+					{
+						echo "Name can´t be empty";
+					}
+					else
+					{
+						$sql = "INSERT INTO members (pass, name, email)
+				VALUES ('$password', '$name', '$email')";
+				$result = mysql_query($sql);
+				echo "Success";
+						//CreateAccount($password, $name, $email);
+					}
+					}
+					else
+					{
+						echo "Password and re-entered 		  	                           password must be identical.";
+					}
+					}
+
+				}
+				else
+				{
+					echo "E-mail must contain . to the right 				of @.";
+				}
+			}
+			else
+			{
+				echo "E-mail must contain @.";
+			}	
+		//}
+		
+		}
+		//function CreateAccount($password, $name, $email)
+		//{
+				
+		//}
+	 
+	 	?>
 
     </head>
 
@@ -53,16 +119,16 @@
             <div class="body">
              
               <label>E-Mail</label>
-              <input type="text">
+              <input type="text" name="email" value="">
               
               <label>Password</label>
-              <input type="password">
+              <input type="password" name="password" value="">
               
               <label>Password again</label>
-              <input type="password">
+              <input type="password" name="reEnteredPassword" value="">
               
               <label>Name:</label>
-              <input type="text">
+              <input type="text" name="name" value="">
             </div>
             
             <div class="footer">
