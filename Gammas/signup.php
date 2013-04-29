@@ -1,3 +1,4 @@
+<?php include "header.php" ?>
 <!DOCTYPE html>
 <!-- saved from url=(0050)http://wbpreview.com/previews/WB0F56883/index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,30 +32,15 @@
 	  
 	  	if(isset($_POST['submit']))
 		{
-			$connection = mysql_connect("http://gloriousgammas-154741.phpmyadmin.mysql.binero.se", "154741_ar88910","GGNybs232", "154741-gloriousgammas" );
-			
-			if(!$connection)
-			{
-				die('Could not connect'. mysql_error());
-			}
-			echo 'Connected successfully';
-			
-			$email = $_POST['email'];
+			/*$email = $_POST['email'];
 			$password = $_POST['password'];
 			$reEntredPassword = $_POST['reEnteredPassword'];
-			$name = $_POST['name'];
+			$name = $_POST['name'];*/
 			
 			$sql = "INSERT INTO members (pass, name, email)
 			VALUES ('$_POST[password]', '$_POST[name]', '$_POST[email]')";
-			
-			if(!mysql_query($connection, $sql))
-			{
-				die('Error: ' . mysql_error($connection));
-			}
-			$result = mysql_query($connection, $sql);
+			$result = mysql_query($sql);
 			echo "Person added";
-			
-			mysql_close($connection);
 		}
 			
 			/*if(strpos($email, '@') !== false)
@@ -117,7 +103,7 @@
       <div class="container">
 
         <div id="login-wraper">
-          <form class="form login-form">
+          <form class="form login-form" method="POST">
             <legend>Register </legend>
             
             <div class="body">
