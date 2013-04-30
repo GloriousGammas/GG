@@ -134,22 +134,29 @@ if (!isset($_SESSION['sess_user'])) {
     <?php 
 	// Ifall man trycker på ladda upp:
     if(isset($_POST['submit'])){
-	
-	// Målet där filen ska hamna.
- $target = "upload/"; 
+		
+		
+
+
+// Målet där filen ska hamna.
+if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
+    mkdir('upload/' . $_SESSION['sess_user'] . '/');
+}
+
+ $target = "upload/" . $_SESSION['sess_user'] ."/" ; 
  $target = $target . basename( $_FILES['uploaded']['name']) ; 
  $ok=1; 
  
  
  // Hur stor filen får vara.
- if ($uploaded_size > 350000) 
+ if ($_FILES['uploaded']['size'] > 2000000) 
  { 
  echo "Your file is too large.<br>"; 
  $ok=0; 
  } 
  
 // Vilka filer som är tillåtna, nu rä endast .php otillåtet.
- if ($uploaded_type =="text/php") 
+ if ($_FILES["uploaded"]["type"] =="text/php") 
  { 
  echo "No PHP files<br>"; 
  $ok=0; 
@@ -166,7 +173,16 @@ if (!isset($_SESSION['sess_user'])) {
  { 
  if(move_uploaded_file($_FILES['uploaded']['tmp_name'], $target)) 
  { 
- echo "The file " . basename($_FILES['uploaded']['name']) . " has been uploaded"; 
+ 
+ 
+ // SQL KOD SÅ ATT ALL INFO SPARAS TILL DEN ANVÄNDAREN!!!!!
+ 
+ echo "The file <b>" . basename($_FILES['uploaded']['name']) . "</b> has been uploaded<br>";
+ 
+
+
+ echo "The filesize is: <b>" . $_FILES['uploaded']['size'] . "</b> bytes<br>";
+ echo "The type is: <b>" .  $_FILES["uploaded"]["type"] . "</b>";
  } 
  else 
  { 
@@ -259,7 +275,8 @@ echo '
    
     <br><br>
 
-    <input type="submit" class="btn btn-success" name="submit" value="Upload">
+   <button type="submit" class="btn btn-success" name="submit" value="Upload" id="submit">Upload</button>
+
 
     </form>
 
