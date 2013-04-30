@@ -1,71 +1,191 @@
 <?php include "header.php";
 
 	// Kolla om inloggad = sessionen satt 
-
 if (!isset($_SESSION['sess_user'])) {
+
  header("Location: login.php");
+
  exit;
+
 }
 
 
+
+
+
 ?>
+
 <!DOCTYPE html>
+
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
+
 <title>Overview - Glorious Gammas</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="description" content="Responsive HTML template for Your company">
 
+
+
 <!-- Le styles -->
+
 <link href="css/bootstrap.min.css" rel="stylesheet">
+
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="css/typica-login.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css">
 <link rel="stylesheet" href="css/custom.css">
 
+
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
     <!--[if lt IE 9]>
+
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
       <![endif]-->
+
+
+
 
 
       <?php
 
-// Utloggning 
+
+
+		// Utloggning 
       if (isset($_POST['logout'])){
+
        $_SESSION = array();
+
        session_destroy();
+
        header("Location: login.php");
+
        exit;
+
      }
+
      ?>
+
 
 
    </head>
 
+
+
    <body>
 
+
+
     <div class="navbar navbar-fixed-top">
+
       <div class="navbar-inner">
+
+
 
         <div class="container">
 
+
+
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
             <span class="icon-bar"></span>
+
             <span class="icon-bar"></span>
+
             <span class="icon-bar"></span>
+
           </a>
+
           <a class="brand" href="index.php">Glorious Gammas</a>
+
 
           <form class="pull-right" method="post" action="" style="margin-top:20px;">
 
-            <button type="submit" name="logout" class="btn btn-info">Logout</button>
+
+
+            <button type="submit" name="logout" class="btn btn-info">Logout <?php echo $_SESSION['sess_user'] ?></button>
+
           </form>
 
+
+
         </div>
+
       </div>
+
     </div>
 
+
+
     <div class="container">
+    
+    <div align="center" style="padding:20px;">
+  
+          <a class="btn btn-large btn-primary" data-toggle="modal" href="#myModal">Upload a file</a>
+    
+    <br><br>
+
+    <?php 
+	// Ifall man trycker på ladda upp:
+    if(isset($_POST['submit'])){
+	
+	// Målet där filen ska hamna.
+ $target = "upload/"; 
+ $target = $target . basename( $_FILES['uploaded']['name']) ; 
+ $ok=1; 
+ 
+ 
+ // Hur stor filen får vara.
+ if ($uploaded_size > 350000) 
+ { 
+ echo "Your file is too large.<br>"; 
+ $ok=0; 
+ } 
+ 
+// Vilka filer som är tillåtna, nu rä endast .php otillåtet.
+ if ($uploaded_type =="text/php") 
+ { 
+ echo "No PHP files<br>"; 
+ $ok=0; 
+ } 
+ 
+ //Here we check that $ok was not set to 0 by an error 
+ if ($ok==0) 
+ { 
+ echo "Sorry your file was not uploaded"; 
+ } 
+ 
+ //If everything is ok we try to upload it 
+ else 
+ { 
+ if(move_uploaded_file($_FILES['uploaded']['tmp_name'], $target)) 
+ { 
+ echo "The file " . basename($_FILES['uploaded']['name']) . " has been uploaded"; 
+ } 
+ else 
+ { 
+ echo "Sorry, there was a problem uploading your file."; 
+ } 
+ } 
+	}
+ ?> 
+    
+    
+</div>
+
+
+
+
+
+
+
+
       <table class="table table-striped" id="overview">
         <thead>
           <tr>
@@ -76,85 +196,103 @@ if (!isset($_SESSION['sess_user'])) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Dokument.doc</td>
-            <td>2013-04-22</td>
-            <td>1mb</td>
-            <td>
+        
+          <?php
 
-              <div class="btn-group">
-                <a class="btn" href="#"><i class="icon-download-alt"></i></a>
-                <a class="btn" href="#"><i class="icon-remove"></i></a>
-              </div>
-            </td>
-          </tr>
-          
-          <tr>
-            <td>Fil.doc</td>
-            <td>2013-04-22</td>
-            <td>1mb</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn" href="#"><i class="icon-download-alt"></i></a>
-                <a class="btn" href="#"><i class="icon-remove"></i></a>
-              </div>
-            </td>
-          </tr>
-          
-          
-          
-          <tr>
-            <td>Häst.jpg</td>
-            <td>2013-04-22</td>
-            <td>1mb</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn" href="#"><i class="icon-download-alt"></i></a>
-                <a class="btn" href="#"><i class="icon-remove"></i></a>
-              </div>
-            </td>
-          </tr>
-          
-          
-          <tr>
-            <td>Dokument.doc</td>
-            <td>2013-04-22</td>
-            <td>1mb</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn" href="#"><i class="icon-download-alt"></i></a>
-                <a class="btn" href="#"><i class="icon-remove"></i></a>
-              </div>
-            </td>
-          </tr>
-          
-          
-          <tr>
-            <td>Dokument.doc</td>
-            <td>2013-04-22</td>
-            <td>1mb</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn" href="#"><i class="icon-download-alt"></i></a>
-                <a class="btn" href="#"><i class="icon-remove"></i></a>
-              </div>
-            </td>
-          </tr>
+// Test grej för att visa alla filer som ligger i upload/. Får fixa så att man visar från databasen istället!
+		  
+foreach (new DirectoryIterator("./upload/") as $fn) {
+echo "<tr>";
+echo "<td>";
+
+ print $fn->getFilename();
+
+echo "</td>";
+
+echo "<td>2013-04-22</td>
+<td>1mb</td>";
+
+echo "<td>";
+echo '
+<div class="btn-group">
+<a class="btn" href="#"><i class="icon-download-alt"></i></a>
+<a class="btn" href="#"><i class="icon-remove"></i></a>
+</div>
+</td>
+</tr>';}
+
+
+?> 
         </tbody>
       </table>
+
     </div>
 
+
+ 
+ 
+
+<!-- Uppladdnings fönstret! -->
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">x</button>
+    <h3>Upload your file.</h3>
+  </div>
+  
+    <!-- Här ska ladda upp grejjerna vara!!!!!--->
+  <div class="modal-body" align="center">
+  
+  <form action="" method="post" name="uploadform" enctype="multipart/form-data">
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="input-append">
+    <div class="uneditable-input span3">
+    <i class="icon-file fileupload-exists"></i>
+     <span class="fileupload-preview"></span>
+     </div>
+     <span class="btn btn-file">
+     <span class="fileupload-new">Select file</span>
+     <span class="fileupload-exists">Change</span>
+    <input type="file" name="uploaded"/>
+    </span>
+   
+    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+   
+    <br><br>
+
+    <input type="submit" class="btn btn-success" name="submit" value="Upload">
+
+    </form>
+
+  </div>
+</div>
+    
+  </div>
+</div>
+
+
     <!-- Istället för att rabbla samma skit om och om igen. -->
+
     <?php // include "footer.php" ?>
 
+
+
     <!-- Le javascript
+
     ================================================== -->
+
     <!-- Placed at the end of the document so the pages load faster -->
+
     <script src="js/jquery.js"></script>
+
     <script src="js/bootstrap.js"></script>
+
     <script src="js/backstretch.min.js"></script>
+
     <script src="js/typica-login.js"></script>
 
+    <script src="js/bootstrap-fileupload.js"></script>
     
+
+
 
   </body></html>
