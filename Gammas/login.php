@@ -49,10 +49,14 @@ body {
      }
 
 	// Inloggning vid postat formulär
-     if (isset($_POST['submit'])){
+     if (isset($_POST['login'])){
+      
+      // Gör om lösenordet till en md5 hash innan det kollas mot databas.
+      $hashPass = md5(utf8_encode($_POST['pass']));
+
        $sql = "SELECT id FROM members
        WHERE email='{$_POST['email']}'
-       AND pass='{$_POST['pass']}'";
+       AND pass='$hashPass'";
        $result = mysql_query($sql);
 
    // Hittades inte användarnamn och lösenord 
@@ -90,6 +94,10 @@ body {
           </a>
 
           <a class="brand" href="index.php">Glorious Gammas</a>
+          <?php
+                echo $pass;
+                echo $hashPass;
+          ?>
 
         </div>
 
@@ -97,22 +105,19 @@ body {
 
     </div>
 
-
-
     <div class="container">
       <div id="login-wraper">
 
-        <form class="form login-form" action="login.php" method="POST">
+        <form class="form login-form" method="POST">
 
           <legend>Sign in to <span class="blue">Glorious</span></legend>
 
           <div class="body">
 
             <label>Email:</label>
-
             <input type="text" name="email">
+            
             <label>Password:</label>
-
             <input type="password" name="pass">
           </div>
           
@@ -120,13 +125,11 @@ body {
             <label class="checkbox inline">
               <input type="checkbox" id="inlineCheckbox1" value="option1"> Remember me
             </label>
-            <input type="submit" class="btn btn-info" name="submit" value="Log in">
+            <button type="submit" class="btn btn-info" name="login">Login</button>
           </div>
         </form>
       </div>
     </div>
-
-
 
     <footer class="white navbar-fixed-bottom">
       Don't have an account yet? <a href="signup.php" class="btn btn-black">Register</a>
@@ -142,11 +145,5 @@ body {
     <script src="js/backstretch.min.js"></script>
     <script src="js/typica-login.js"></script>
 
-
     <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 1099px; width: 1920px; z-index: -999999; position: fixed;"><img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1954.7317708333333px; height: 1099px; max-width: none; z-index: -999999; left: -17.36588541666663px; top: 0px;" src="img/bg3.jpg"></div>
-
-
-
-
-
   </body></html>

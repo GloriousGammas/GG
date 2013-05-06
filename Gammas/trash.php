@@ -2,17 +2,69 @@
 
 	// Kolla om inloggad = sessionen satt 
 if (!isset($_SESSION['sess_user'])) {
+
  header("Location: login.php");
+
  exit;
+
 }
 
-  
+
+
+// Gömma en fil om man trycker på krysset.
+if (isset($_GET['deleteid']))
+{
+	$hide = "UPDATE files SET hide = 1 WHERE id = " . $_GET['deleteid'];
+	$resultUpdate = mysql_query($hide);
+}
+
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+
+<title>Overview - Glorious Gammas</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Responsive HTML template for Your company">
+
+
+
+<!-- Le styles -->
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="css/typica-login.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css">
+<link rel="stylesheet" href="css/custom.css">
+
+
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+
+    <!--[if lt IE 9]>
+
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+      <![endif]-->
+
+      <?php
+	  
+	  
 	  // Kollar vilket ID den inloggade har.
 			$kollaID = "SELECT id FROM members WHERE email = '".$_SESSION['sess_user']."'";
 			$result2 = mysql_query($kollaID);
 			$row = mysql_fetch_array($result2);
 		    $idMembers = $row['id']; 
 		
+	  
 
     	// Utloggning 
       if (isset($_POST['logout'])){
@@ -23,83 +75,55 @@ if (!isset($_SESSION['sess_user'])) {
 
      }
 
+     ?>
 
-// Gömma en fil om man trycker på krysset.
-if (isset($_GET['deleteid']))
-{
-	$hide = "UPDATE files SET hide = 1 WHERE id = " . $_GET['deleteid'];
-	$resultUpdate = mysql_query($hide);
-}
 
-if (isset($_GET['folder']))
-{
-	$hide=0;
-
-	    // Visar soptunnan
-		if (isset($_POST['trash']))
-			{
-  				$hide = 1;
-			}
-
-	 $KollOmManFarSe = "SELECT * FROM foldersMembers WHERE idFolders =".$_GET['folder'];
-	 $resultKoll = mysql_query($KollOmManFarSe);
-	while ($restest = mysql_fetch_array($resultKoll))
-    {
-	
-	 $idMembersKoll = $restest['idMembers']; 
-	 
-	 if ($idMembers == $idMembersKoll)
-	 {
-		 $idFolders = $_GET['folder'];
-	 }
-	 else {
-		 
-		 echo '<script>
-
-alert("You do not have permission to this shit!!");
-</script>';
-		 }	
-}}
-
-?>
-
-<!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Overview - Glorious Gammas</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Responsive HTML template for Your company">
-
-<!-- Le styles -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/typica-login.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css">
-<link rel="stylesheet" href="css/custom.css">
 
    </head>
+
+
+
    <body>
+
+
+
     <div class="navbar navbar-fixed-top">
+
       <div class="navbar-inner">
+
         <div class="container">
+
+
 
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 
             <span class="icon-bar"></span>
+
             <span class="icon-bar"></span>
+
             <span class="icon-bar"></span>
 
           </a>
 
           <a class="brand" href="index.php">Glorious Gammas</a>
 
+
           <form class="pull-right" method="post" action="" style="margin-top:20px;">
+
+
+
             <button type="submit" name="logout" class="btn btn-info">Logout <?php echo $_SESSION['sess_user'] ?></button>
+
           </form>
 
+
+
         </div>
+
       </div>
+
     </div>
+
 
 
     <div class="container">
@@ -113,6 +137,9 @@ alert("You do not have permission to this shit!!");
 	// Ifall man trycker på ladda upp:
     if(isset($_POST['submit'])){
 		
+		
+
+
 // Skapar en mapp för användaren på servern om den inte redan finns.
 if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
     mkdir('upload/' . $_SESSION['sess_user'] . '/');
@@ -179,9 +206,23 @@ if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
  echo "Sorry, there was a problem uploading your file."; 
  } 
  } 
- }
+	}
 	
-	   
+	        // Kollar vilka folder den har rättighet till.
+			$kollaFolder = "SELECT idFolders FROM foldersMembers WHERE idMembers = '".$idMembers."'";
+			$result3 = mysql_query($kollaFolder);
+			$row2 = mysql_fetch_array($result3);
+			$idFolders = $row2['idFolders'];
+	
+	
+	
+		 // Hämtar foldernamnet.
+	      $getFolderNames = "SELECT * FROM folders WHERE id =" .$idFolders;
+		  $result8 = mysql_query($getFolderNames);
+		  $folderNameArray = mysql_fetch_array($result8);
+		  $folderName = $folderNameArray['name']; 
+		  
+		  echo $folderName;
 	
 	
 	
@@ -205,45 +246,17 @@ if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
         </thead>
         <tbody>
           
-          <?php 
-		   
-		   // Kollar vilka folders den har rättighet till.
-			$kollaFolder = "SELECT idFolders FROM foldersMembers WHERE idMembers = '".$idMembers."'";
-			$result3 = mysql_query($kollaFolder);
-		
-		 // För alla folders som finns till en användare.
-		   while($allaFoldersArray = mysql_fetch_array($result3))
-{
-		   $idFolders1 = $allaFoldersArray['idFolders']; 
-		 // Hämtar allt från folders (foldernamnet).
-	      $getFolderNames = "SELECT * FROM folders WHERE id =" .$idFolders1;
-		  $result8 = mysql_query($getFolderNames);
-		 
-		 while ($folderNameArray = mysql_fetch_array($result8))
-		 {
-			 echo "<tr>";
-			 echo "<td>";
-		     echo '<i class="icon-folder-open"></i> <a href="?folder='.$folderNameArray['id'].'"> ' . $folderNameArray['name'].'</a>'; 
-			 echo "</td>";
-			 echo "</tr>";
-	
-		 }
-			   
- }
-	
-		  ?>
-          
-
-             <tr>
-        <td> 
-        <form method="post">
-        <i class="icon-trash"></i><button type="submit" name="trash" class="btn btn-link">Trashcan</button>
-        </form>
-        
-        </td>        
+        <tr>
+        <td><i class="icon-folder-open"></i> <a href="http://www.gg.dlucodesign.se/index.php">Home</a></td>        
         </tr>
-
-       </tbody>
+             
+             
+             <tr>
+        <td><i class="icon-trash"></i> <a href="#">Trashcan</a></td>        
+        </tr>
+           
+           
+          </tbody>
       </table>
     
 
@@ -251,7 +264,7 @@ if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
     <div class="span8">
     <!--Body content-->
     
-    <table class="table table-hover" id="overview">
+    <table class="table table-striped" id="overview">
         <thead>
           <tr>
             <th>Filename</th>
@@ -265,6 +278,7 @@ if (!file_exists('upload/' . $_SESSION['sess_user'] . '/')) {
      
           <?php
 		  
+
 		  
 // Hämtar allt (alla filer) som tillhör en specifik folder.		
 $getFileIDs = "SELECT * FROM foldersFiles WHERE idFolders = '".$idFolders."'";
@@ -273,9 +287,8 @@ $result5 = mysql_query($getFileIDs);
 // För varje fil som tillhör en användare:
 while($idFilesArray = mysql_fetch_array($result5))
   {
-
 	  // Hämtar filiinfo.
-	  $getFileInfo = "SELECT * FROM files WHERE id = '".$idFilesArray['idFiles']."' AND hide =".$hide;
+	  $getFileInfo = "SELECT * FROM files WHERE id = '".$idFilesArray['idFiles']."' AND hide = 1";
 	  $result6 = mysql_query($getFileInfo);
 	  
 	  // Skriver ut alla filer:

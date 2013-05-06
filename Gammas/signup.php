@@ -2,8 +2,6 @@
 
 <!DOCTYPE html>
 
-<!-- saved from url=(0050)http://wbpreview.com/previews/WB0F56883/index.html -->
-
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta charset="utf-8">
@@ -42,259 +40,180 @@
 
       body {
 
-        background: url(img/bg3.jpg) no-repeat center center fixed;
+      	background: url(img/bg3.jpg) no-repeat center center fixed;
 
-        -webkit-background-size: cover;
+      	-webkit-background-size: cover;
 
-        -moz-background-size: cover;
+      	-moz-background-size: cover;
 
-        -o-background-size: cover;
+      	-o-background-size: cover;
 
-        background-size: cover;
+      	background-size: cover;
 
+      }
+      #login-wraper {
+      	text-align: left;
+      }
+      .help-inline {
+      	margin-top: -10px;
       }
 
       </style>
 
-      
-
       <?php
+      // Används för hjälp vid registrering.
+      $helpEmail = "Enter a valid e-mail.";
+      $helpPassword = "Use a strong password";
+      $helpConfirmPassword = "Re-enter your password.";
+      $helpName = "Your full name.";
+
+      if(isset($_POST['submit']))
+      {
+      	// Smaskiga variabler.
+      	$memberid;
+      	$folderid;
+      	$userEmail = $_POST['email'];
+      	$userPass = $_POST['password'];
+      	$userConfirmPass = $_POST['reEnteredPassword'];
+      	$userName = $_POST['name'];
+
+      	// Kollar i databasen om det redan finns en existerande mejladress.
+      	if ($userEmail) 
+      	{
+      		$emailExist = true;
+      		$query = mysql_query("SELECT * FROM members WHERE email='$userEmail'");
 
-	  
+      		// Om det finns blir numrows = 1.
+      		$numrows = mysql_num_rows($query);
 
-	  	if(isset($_POST['submit']))
+      		if ($numrows!=0)
+      		{
+      			$helpEmail = "This e-mail is taken.";
+      			$emailExist = false;
+      		}
+      		else {
+      			$helpEmail = "Looks good!";
+      			$emailExist = true;
+      		}
+      	}
 
-		{
-		
-		 $memberid;
-		 $folderid;
- 
-			/*$email = $_POST['email'];
+      	// Kontrollerar att det är en godkänd emailadress.
+      	if ($userEmail) {
 
-			$password = $_POST['password'];
+      		$emailValid = true;
+      		if(!filter_var($userEmail, FILTER_VALIDATE_EMAIL))
+      		{
+      			$helpEmail = "E-mail is not valid!";
+      			$emailValid = false;
+      		}
+      	}
 
-			$reEntredPassword = $_POST['reEnteredPassword'];
+      	// Kontrollerar att användaren skrivit in korrekt lösenord.
+      	if ($userPass == $userConfirmPass) {
+      		$helpPassword = "Password match";
+      		$helpConfirmPassword = "Password match";
+      		$userPassOk = true;
+      	}
 
-			$name = $_POST['name'];*/
+      	// Kontrollerar att användaren matat in ett namn.
+      	if (!empty($userName)) {
+      		$helpName = "Looks good!";
+      		$userNameOk = true;
+      	}
+      	else {
+      		$helpName = "Enter your name.";
+      	}
 
+      	// Om allt ovan true skicka iväg till databas.
+      	if ($emailExist && $emailValid && $userPassOk && $userNameOk) {
 
-			$addMember = "INSERT INTO members (pass, name, email)
-			VALUES ('".$_POST[password]."', '".$_POST[name]."', '".$_POST[email]."')";
-			$result = mysql_query($addMember);
-		    $memberid = mysql_insert_id();
-		
-	
-			$addFolders = "INSERT INTO folders (name)
-			VALUES ('home')";
-			$result2 = mysql_query($addFolders);
-		    $folderid = mysql_insert_id();
-			
-			
-			$addMemberFolders = "INSERT INTO foldersMembers (idFolder, idMembers)
-			VALUES (".$folderid.", ".$memberid.")" ;
-			$result3 = mysql_query($addMemberFolders);
-	
-			
-			
-			
-			
-			
-		//	header("Location: login.php");
+      		// md5 hashar lösenordet innan det skickas iväg.
+      		$hashPass = md5(utf8_encode($_POST['password']));
 
-		}
+      		$addMember = "INSERT INTO members (pass, name, email)
+      		VALUES ('".$hashPass."', '".$_POST[name]."', '".$_POST[email]."')";
+      		$result = mysql_query($addMember);
+      		$memberid = mysql_insert_id();
 
-			
 
-			/*if(strpos($email, '@') !== false)
-			{
-				$checkEmail = strstr($eMail, "@");
+      		$addFolders = "INSERT INTO folders (name)
+      		VALUES ('home')";
+      		$result2 = mysql_query($addFolders);
+      		$folderid = mysql_insert_id();
 
-				if(strpos($checkMail, '.') !== false)
 
-				{
+      		$addMemberFolders = "INSERT INTO foldersMembers (idFolders, idMembers)
+      		VALUES (".$folderid.", ".$memberid.")" ;
+      		$result3 = mysql_query($addMemberFolders);
 
-					if(empty($password))
+      		header("Location: login.php");
+      	}
+      }
+      ?>
+  </head>
+  <body>
+  	<div class="navbar navbar-fixed-top">
 
-					{
+  		<div class="navbar-inner">
 
-						echo "Password can´t be empty.";
+  			<div class="container">
 
-					}
+  				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 
-					else
+  					<span class="icon-bar"></span>
 
-					{
+  					<span class="icon-bar"></span>
 
-					if($password == $reEntredPassword)
+  					<span class="icon-bar"></span>
 
-					{
+  				</a>
 
-					if(empty($name))
+  				<a class="brand" href="index.php">Glorious Gammas</a>
 
-					{
+  			</div>
 
-						echo "Name can´t be empty";
+  		</div>
 
-					}
+  	</div>
 
-					else
+  	<div class="container">
 
-					{
+  		<div id="login-wraper">
 
+  			<form class="form login-form" method="POST">
 
+  				<legend>Register</legend>
 
-					}
+  				<label>E-Mail</label>
 
-					}
+  				<input type="text" name="email"><span class="help-inline" id="helpEmail"><?php echo $helpEmail; ?></span>
 
-					else
+  				<label>Password</label>
 
-					{
+  				<input type="password" name="password"><span class="help-inline" id="helpPassword"><?php echo $helpPassword; ?></span>
 
-						echo "Password and re-entered 		  	                           password must be identical.";
+  				<label>Confirm password</label>
 
-					}
+  				<input type="password" name="reEnteredPassword"><span class="help-inline" id="helpConfirmPassword"><?php echo $helpConfirmPassword; ?></span>
 
-					}
+  				<label>Name:</label>
 
+  				<input type="text" name="name"><span class="help-inline" id="helpName"><?php echo $helpName; ?></span>
 
+  				<div class="footer">
 
-				}
+  					<button type="submit" name="submit" class="btn btn-info">Register</button>
 
-				else
+  				</div>
 
-				{
+  			</form>
 
-					echo "E-mail must contain . to the right of @.";
+  		</div>
 
-				}
+  	</div>
 
-			}
+  	<footer class="white navbar-fixed-bottom">
 
-			else
+  		Already have an account? <a href="login.php" class="btn btn-black">Log in</a>
 
-			{
-
-				echo "E-mail must contain @.";
-
-			}	*/
-
-	 	?>
-
-
-
-    </head>
-
-
-
-    <body>
-
-
-
-      <div class="navbar navbar-fixed-top">
-
-        <div class="navbar-inner">
-
-          <div class="container">
-
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-
-              <span class="icon-bar"></span>
-
-              <span class="icon-bar"></span>
-
-              <span class="icon-bar"></span>
-
-            </a>
-
-            <a class="brand" href="index.php">Glorious Gammas</a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="container">
-
-
-
-        <div id="login-wraper">
-
-          <form class="form login-form" method="POST">
-
-            <legend>Register </legend>
-
-            
-
-            <div class="body">
-
-             
-
-              <label>E-Mail</label>
-
-              <input type="text" name="email" value="">
-
-              
-
-              <label>Password</label>
-
-              <input type="password" name="password" value="">
-
-              
-
-              <label>Password again</label>
-
-              <input type="password" name="reEnteredPassword" value="">
-
-              
-
-              <label>Name:</label>
-
-              <input type="text" name="name" value="">
-
-            </div>
-
-            
-
-            <div class="footer">
-
-              <label class="checkbox inline">
-
-                <input type="checkbox" id="inlineCheckbox1" value="option1"> Remember me
-
-              </label>
-
-              
-
-              <button type="submit" name="submit" class="btn btn-info">Register</button>
-
-            </div>
-
-            
-
-          </form>
-
-        </div>
-
-
-
-      </div>
-
-
-
-      <footer class="white navbar-fixed-bottom">
-
-        Already have an account? <a href="login.php" class="btn btn-black">Log in</a>
-
-      </footer>
-
-
-
-
-
-    <!-- Le javascript
-
-    =============================
+  	</footer>
