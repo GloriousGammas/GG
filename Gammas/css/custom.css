@@ -3,3 +3,20 @@
 #overview td:nth-child(4) { width: 50px; } /* Ställer in bredden på Action i tabellen */
 /*footer.white { height: auto; text-align: left; background: #333; color: #ddd; text-shadow: 1px 1px 1px #222; }
 footer.white h2 { border-bottom: 1px solid #ddd } */
+
+body {
+	height: 100%;
+	padding-top: 0;
+	background: url(../img/bg3.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.indexContainer {
+	padding-top: 80px;
+	width: 100%;
+	background: white;
+	height: 100%;
+}
