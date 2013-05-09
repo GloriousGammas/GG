@@ -17,19 +17,27 @@ if (isset($_POST['createFolderSubmit']))
 print_r($_SESSION . '<br>');
 print_r($_POST);
 
-
-// Create folder
+// Share with a member
 if (isset($_POST['memberShare']))
 {
+	$hiddenFolderid = $_POST['hiddenFolderid'];
+	$idMember = $POST['enterMemberShare'];
 	
-		
-		
-	$_SESSION['hiddenFolderid']= $_POST['hiddenFolderid'];
+	print '<script type="text/javascript">'; 
+	print 'alert(" '.$hiddenFolderid.$idMember.' ")'; 
+	print '</script>';
 	
-	echo '<script>document.location.href = "#shareWithMembers";</script>';
-	//href="#shareWithMembers"
-
+	$kollaID = "SELECT id FROM members WHERE email = '".$_SESSION['idMember']."'";
+	$result2 = mysql_query($kollaID);
+	$row = mysql_fetch_array($result2);
+	$idMember = $row['id']; 
+	
+	$addMemberFolders = "INSERT INTO foldersMembers (idFolders, idMembers)
+	VALUES (".$hiddenFolderid.", ".$idMember.")" ;
+	$result3 = mysql_query($addMemberFolders);
 }
+
+
 
 /*if($_SESSION['newMemberShare'] = 1)
 {
@@ -115,11 +123,15 @@ if (isset($_POST['memberShare']))
               echo "</td>";
 			  
 			  echo "<td>";
-			   echo '			   
+			  echo '			   
 			   
 			   <form action="" name="optionsform" method="post">
 			   <input type="hidden" value="'.$folderNameArray['id'].'" name="hiddenFolderid"/>
-			   <button type="submit" class="btn btn-mini" name="memberShare">Shara</button>
+			   
+			   Member name:<input type="text" name="enterMemberShare" style="width:150px;"></input>
+			   
+			   <input type="submit" class="btn btn-mini" name="memberShare" value="Share" 	  style="width:50px;" style="height:20px"></input><br />
+			   
 			   <input type="submit" class="btn btn-mini" name="rename" value="Rename" style="width:50px;"></input><br />
 			   <input type="submit" class="btn btn-mini" name="delete" value="Delete" style="width:50px;"></input>
 			   
@@ -128,6 +140,7 @@ if (isset($_POST['memberShare']))
 			  echo "</td>";  
               echo "</tr>";
 			  //<a href="#shareWithMembers" data-toggle="modal">Sharea </a>
+			  //<a class="btn btn-info" data-toggle="modal" href="#shareWithMembers" style="width: 50px;">Sha</a>
 
             }
           }
